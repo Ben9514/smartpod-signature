@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smartpod email signature</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f7fbfb; color: #212934; font-family: Montserrat, Arial, Helvetica, sans-serif; }
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
+    header { border-bottom: 1px solid #e6eaee; padding-bottom: 28px; margin-bottom: 28px; }
+    .kicker { margin: 0; color: #04aa9d; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+    h1 { margin: 8px 0 0; font-size: 34px; line-height: 1.15; font-weight: 600; }
+    .lede { max-width: 640px; color: #6a7684; line-height: 1.6; }
+    .layout { display: grid; gap: 28px; }
+    @media (min-width: 900px) { .layout { grid-template-columns: 340px minmax(0, 1fr); align-items: start; } }
+    .card, .panel { background: #fff; border: 1px solid #e6eaee; border-radius: 16px; }
+    .panel { padding: 20px; box-shadow: 0 1px 2px rgba(33, 41, 52, 0.04); }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .field { margin-top: 16px; }
+    input { width: 100%; height: 40px; border: 1px solid #e6eaee; border-radius: 10px; padding: 0 12px; font: inherit; color: #212934; background: #fff; }
+    input:focus { outline: 2px solid rgba(4, 170, 157, 0.35); border-color: #04aa9d; }
+    .hint { margin: 6px 0 0; color: #6a7684; font-size: 14px; line-height: 1.5; }
+    .actions { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    button { height: 40px; border-radius: 10px; border: 1px solid transparent; font: inherit; font-weight: 600; cursor: pointer; }
+    button.primary { background: #04aa9d; color: #fff; }
+    button.primary:hover { background: #038f84; }
+    button.secondary { background: #fff; border-color: #e6eaee; color: #212934; }
+    .error { color: #b42318; font-size: 14px; }
+    .preview-wrap { min-width: 0; }
+    .desk { overflow-x: auto; background: #f4f7f8; border: 1px solid #e6eaee; border-radius: 16px; padding: 24px; }
+    .email { min-width: 600px; background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 1px 2px rgba(33, 41, 52, 0.05); }
+    .meta { margin: 0 0 16px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #6a7684; }
+    .guides { display: grid; gap: 16px; margin-top: 36px; }
+    @media (min-width: 800px) { .guides { grid-template-columns: 1fr 1fr 1fr; } }
+    .card { padding: 20px; }
+    .card h2 { margin: 0; font-size: 14px; }
+    .card p { margin: 8px 0 0; color: #6a7684; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="kicker">Smartpod</p>
+      <h1>Email signature for the team</h1>
+      <p class="lede">Add your name and job role, then copy the signature into Gmail or Outlook. The logo, Made in Britain mark, social links, and Tuxford address are already set.</p>
+    </header>
+    <div class="layout">
+      <section class="panel">
+        <h2 style="margin:0;font-size:16px;">Employee details</h2>
+        <p class="hint">Leave phone and email blank to use the company details from smartpod.com.</p>
+        <div class="field"><label for="name">Employee name</label><input id="name" placeholder="Your name" autocomplete="name" /></div>
+        <div class="field"><label for="role">Job role</label><input id="role" placeholder="Job role" /></div>
+        <div class="field"><label for="phone">Direct phone</label><input id="phone" placeholder="01709 570720" autocomplete="tel" /></div>
+        <div class="field"><label for="email">Direct email</label><input id="email" type="email" placeholder="info@teamsmartpod.com" autocomplete="email" /></div>
+        <div class="actions">
+          <button class="primary" id="copy" type="button">Copy signature</button>
+          <div class="row">
+            <button class="secondary" id="copy-html" type="button">Copy HTML</button>
+            <button class="secondary" id="download" type="button">Download</button>
+          </div>
+        </div>
+        <p class="error" id="error" hidden></p>
+      </section>
+      <section class="preview-wrap">
+        <h2 style="margin:0 0 4px;font-size:16px;">Preview</h2>
+        <p class="hint" style="margin-bottom:12px;">This is the signature people will see in an email.</p>
+        <div class="desk"><div class="email"><p class="meta">New message</p><div id="preview"></div></div></div>
+      </section>
+    </div>
+    <section class="guides">
+      <article class="card"><h2>Add it in Gmail</h2><p>Open Settings, then See all settings, then General. In Signature, create one and paste with Copy signature.</p></article>
+      <article class="card"><h2>Add it in Outlook</h2><p>Open Settings, then Account, then Signatures. Choose New, then paste the copied signature into the editor.</p></article>
+      <article class="card"><h2>Company details</h2><p>Smart Modular Group Ltd, Unit 1 Tuxford Business Park, Ashvale Road, Tuxford, Nottinghamshire, NG22 0NH. 01709 570720 · info@teamsmartpod.com</p></article>
+    </section>
+  </main>
+  <script src="icons.js"></script>
+  <script>
+    const brand = {"teal":"#04aa9d","ink":"#212934","slate":"#6a7684","line":"#e6eaee","phone":"01709 570720","email":"info@teamsmartpod.com","website":"https://www.smartpod.com/","websiteLabel":"smartpod.com","company":"Smart Modular Group Ltd","address":["Unit 1 Tuxford Business Park","Ashvale Road, Tuxford","Nottinghamshire, NG22 0NH"],"font":"Montserrat, Arial, Helvetica, sans-serif","logo":"https://www.smartpod.com/wp-content/uploads/2023/07/Smartpod-Logo-New.png","madeInBritain":"https://www.smartpod.com/wp-content/uploads/2023/07/madeinbritain.png"};
+    const social = [
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/smartpodspaces/", src: ICON.linkedin },
+      { label: "Instagram", href: "https://www.instagram.com/smartpodspaces/", src: ICON.instagram },
+      { label: "Facebook", href: "https://www.facebook.com/smartpodspaces/", src: ICON.facebook },
+      { label: "X", href: "https://x.com/smartpodspaces", src: ICON.x }
+    ];
+    const $ = (id) => document.getElementById(id);
+    function esc(value) {
+      return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+    }
+    function fields() {
+      return { name: $("name").value, role: $("role").value, email: $("email").value, phone: $("phone").value };
+    }
+    function build(f) {
+      const name = esc(f.name.trim() || "Your name");
+      const role = esc(f.role.trim() || "Job role");
+      const email = f.email.trim() || brand.email;
+      const phone = f.phone.trim() || brand.phone;
+      const safeEmail = esc(email);
+      const safePhone = esc(phone);
+      const address = brand.address.map(esc).join("<br>");
+      const icons = social.map((item) => '<td style="padding-right:10px;"><a href="' + item.href + '" target="_blank" style="text-decoration:none;"><img src="' + item.src + '" width="22" height="22" alt="' + item.label + '" style="display:block;border:0;outline:none;width:22px;height:22px;"></a></td>').join("");
+      return '<style type="text/css">@import url(\'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap\');</style><table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;width:560px;max-width:560px;font-family:' + brand.font + ';color:' + brand.ink + ';"><tr><td style="padding:0 16px 0 0;vertical-align:middle;"><a href="' + brand.website + '" target="_blank" style="text-decoration:none;"><img src="' + brand.logo + '" width="268" alt="Smartpod" style="display:block;border:0;outline:none;width:268px;height:auto;"></a></td><td style="padding:0;vertical-align:middle;text-align:right;"><img src="' + brand.madeInBritain + '" width="156" alt="Made in Britain" style="display:inline-block;border:0;outline:none;width:156px;height:auto;"></td></tr><tr><td colspan="2" style="padding:18px 0 0;font-family:' + brand.font + ';font-size:18px;line-height:22px;font-weight:700;color:' + brand.ink + ';">' + name + '</td></tr><tr><td colspan="2" style="padding:3px 0 0;font-family:' + brand.font + ';font-size:13px;line-height:18px;font-weight:600;color:' + brand.teal + ';">' + role + '</td></tr><tr><td colspan="2" style="padding:12px 0 0;font-family:' + brand.font + ';font-size:13px;line-height:18px;font-weight:500;color:' + brand.slate + ';"><a href="tel:' + phone.replace(/[^\d+]/g, "") + '" style="color:' + brand.teal + ';text-decoration:none;">' + safePhone + '</a><span style="color:' + brand.line + ';"> &nbsp;|&nbsp; </span><a href="mailto:' + safeEmail + '" style="color:' + brand.teal + ';text-decoration:none;">' + safeEmail + '</a><span style="color:' + brand.line + ';"> &nbsp;|&nbsp; </span><a href="' + brand.website + '" target="_blank" style="color:' + brand.teal + ';text-decoration:none;">' + brand.websiteLabel + '</a></td></tr><tr><td colspan="2" style="padding:12px 0 0;"><table cellpadding="0" cellspacing="0" border="0" role="presentation"><tr>' + icons + '</tr></table></td></tr><tr><td colspan="2" style="padding:16px 0 0;"><table cellpadding="0" cellspacing="0" border="0" role="presentation" style="width:100%;"><tr><td style="border-top:2px solid ' + brand.teal + ';font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr><tr><td colspan="2" style="padding:12px 0 0;font-family:' + brand.font + ';font-size:12px;line-height:18px;font-weight:500;color:' + brand.slate + ';"><a href="' + brand.website + '" target="_blank" style="color:' + brand.slate + ';text-decoration:none;"><span style="color:' + brand.ink + ';font-weight:700;">' + brand.company + '</span><br>' + address + '</a></td></tr></table>';
+    }
+    function plain(f) {
+      const email = f.email.trim() || brand.email;
+      const phone = f.phone.trim() || brand.phone;
+      return ["Smartpod", "Made in Britain", "", f.name.trim() || "Your name", f.role.trim() || "Job role", "", phone, email, brand.website, "", "LinkedIn: https://www.linkedin.com/company/smartpodspaces/", "Instagram: https://www.instagram.com/smartpodspaces/", "Facebook: https://www.facebook.com/smartpodspaces/", "X: https://x.com/smartpodspaces", "", brand.company, ...brand.address, brand.website].join("\n");
+    }
+    function render() {
+      $("preview").innerHTML = build(fields());
+      $("error").hidden = true;
+    }
+    async function copySignature() {
+      const html = build(fields());
+      const text = plain(fields());
+      try {
+        if (typeof ClipboardItem !== "undefined" && navigator.clipboard && navigator.clipboard.write) {
+          await navigator.clipboard.write([new ClipboardItem({ "text/html": new Blob([html], { type: "text/html" }), "text/plain": new Blob([text], { type: "text/plain" }) })]);
+        } else {
+          await fallback(html);
+        }
+        $("copy").textContent = "Signature copied";
+      } catch (err) {
+        try { await fallback(html); $("copy").textContent = "Signature copied"; }
+        catch (e) { $("error").hidden = false; $("error").textContent = "Copy was blocked by the browser. Use Download instead."; }
+      }
+    }
+    async function fallback(html) {
+      const holder = document.createElement("div");
+      holder.contentEditable = "true";
+      holder.innerHTML = html;
+      holder.style.position = "fixed";
+      holder.style.left = "-9999px";
+      document.body.appendChild(holder);
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(holder);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      const ok = document.execCommand("copy");
+      selection.removeAllRanges();
+      holder.remove();
+      if (!ok) throw new Error("copy failed");
+    }
+    ["name", "role", "phone", "email"].forEach((id) => $(id).addEventListener("input", () => { $("copy").textContent = "Copy signature"; render(); }));
+    $("copy").addEventListener("click", copySignature);
+    $("copy-html").addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(build(fields())); $("copy-html").textContent = "HTML copied"; }
+      catch (e) { $("error").hidden = false; $("error").textContent = "Could not copy the HTML. Use Download instead."; }
+    });
+    $("download").addEventListener("click", () => {
+      const file = "<!DOCTYPE html><html><body>" + build(fields()) + "</body></html>";
+      const url = URL.createObjectURL(new Blob([file], { type: "text/html" }));
+      const link = document.createElement("a");
+      const slug = (fields().name.trim() || "employee").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      link.href = url;
+      link.download = "smartpod-signature-" + slug + ".html";
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+    render();
+  </script>
+</body>
+</html>
